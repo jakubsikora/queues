@@ -93,7 +93,7 @@ public class Deque<Item> implements Iterable<Item> {
 
   // delete and return the item at the front
   public Item removeFirst() {
-    if (!first) { throw new java.lang.NoSuchElementException(); }
+    if (first == null) { throw new NoSuchElementException(); }
 
     Node oldFirst = first;
     first = new Node();
@@ -104,7 +104,7 @@ public class Deque<Item> implements Iterable<Item> {
 
   // delete and return the item at the end
   public Item removeLast() {
-    if (!last) { throw new java.lang.NoSuchElementException(); }
+    if (last == null) { throw new NoSuchElementException(); }
 
     Node oldLast = last;
     last = new Node();
@@ -118,9 +118,11 @@ public class Deque<Item> implements Iterable<Item> {
   public static void main(String[] args) {
     Deque<String> d = new Deque<String>();
     d.addLast("a");
+    d.addLast("b");
     StdOut.println(d.removeLast());
-    d.addFirst("a");
     StdOut.println(d.removeFirst());
+    d.addFirst("a");
+//    StdOut.println(d.removeFirst());
 
     //d.addFirst("b");
     StdOut.println(d.first.item + ", " + d.last.item);
