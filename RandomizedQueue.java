@@ -8,6 +8,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   // construct an empty randomized queue
   public RandomizedQueue() {
     a = (Item[]) new Object[1];
+    N = 0;
   }
 
   // is the queue empty?
@@ -33,14 +34,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   private void shuffle() {
     Item[] temp = (Item[]) new Object[N];
     int j = 0;
-
+    
     for (int i = 0; i < N; i++) {
-      if (a[i]) {
+      if (a[i] != null) {
         temp[j] = a[i];
         j++;
       }
     }
-
+    
     a = temp;
   }
 
@@ -59,11 +60,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     int rand = StdRandom.uniform(N);
 
     Item item = a[rand];
+    
     a[rand] = null;
-    N--;
-
+   
     // shuffle array
     shuffle();
+    
+    N--;
 
     // shrink size of array if necessary
     if (N > 0 && N == a.length/4) resize(a.length/2);
@@ -105,9 +108,33 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
       return a[--i];
     }
   }
-
+  
+  private void printQueue() {
+    for (int i = 0; i < N; i++) {
+      System.out.print(a[i] + " ");
+    }
+  }
+  
   // unit testing
   public static void main(String[] args) {
-
+    RandomizedQueue<String> s = new RandomizedQueue<String>();
+    
+    s.enqueue("a");
+    s.enqueue("b");
+    s.enqueue("c");
+    s.enqueue("d");
+    
+    //StdOut.println(s.sample());
+    
+    s.dequeue();
+    
+    Iterator itr = s.iterator();
+    while(itr.hasNext()) {
+      Object element = itr.next();
+      System.out.print(element + " ");
+    }
+    
+    StdOut.println();
+    StdOut.println("(" + s.size() + " left on queue)");
   }
 }
