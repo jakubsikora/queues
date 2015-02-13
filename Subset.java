@@ -12,7 +12,7 @@ public class Subset {
     }
     
     Iterator itr = s.iterator();
-    while(itr.hasNext() && k > 0) {
+    while (itr.hasNext() && k > 0) {
       StdOut.println(s.dequeue());
       k--;
     }

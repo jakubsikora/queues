@@ -1,6 +1,7 @@
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-// Dequeue. A double-ended queue or deque (pronounced "deck") is a generalization of a stack and a queue that supports inserting and
+// Dequeue. A double-ended queue or deque (pronounced "deck") is a generalization
+// of a stack and a queue that supports inserting and
 // removing items from either the front or the back of the data structure.
 // Create a generic data type Deque that implements the following API:
 public class Deque<Item> implements Iterable<Item> {
@@ -73,7 +74,9 @@ public class Deque<Item> implements Iterable<Item> {
 
   // insert the item at the end
   public void addLast(Item item) {
-    if(size() == 0) {
+    if (item == null) { throw new java.lang.NullPointerException(); }
+
+    if (size() == 0) {
       last = new Node();
       last.item = item;
       last.next = null;
@@ -105,11 +108,16 @@ public class Deque<Item> implements Iterable<Item> {
   // delete and return the item at the end
   public Item removeLast() {
     if (last == null) { throw new NoSuchElementException(); }
-
     Node oldLast = last;
+    
     last = new Node();
-    last = oldLast.prev;
-
+    
+    if (oldLast.prev == null) {
+      last = oldLast;
+    } else {
+      last = oldLast.prev;
+    }
+    
     N--;
     return oldLast.item;
   }
@@ -117,15 +125,26 @@ public class Deque<Item> implements Iterable<Item> {
   // unit testing
   public static void main(String[] args) {
     Deque<String> d = new Deque<String>();
-    d.addLast("a");
-    d.addLast("b");
-    StdOut.println(d.removeLast());
-    StdOut.println(d.removeFirst());
     d.addFirst("a");
+    d.addFirst("b");
+    d.addFirst("c");
+    d.addFirst("d");
+    d.addFirst("e");
+    StdOut.println("(" + d.size() + " left on stack)");
+    d.removeLast();
+    d.removeLast();
+    d.removeLast();
+    d.removeLast();
+    d.removeLast();
+
+    
+    //StdOut.println(d.removeLast());
+    //StdOut.println(d.removeFirst());
+    //d.addFirst("a");
 //    StdOut.println(d.removeFirst());
 
     //d.addFirst("b");
-    StdOut.println(d.first.item + ", " + d.last.item);
+    //StdOut.println(d.first.item + ", " + d.last.item);
 
     //StdOut.print(d.addFirst() + " ")
 //    while (!StdIn.isEmpty()) {

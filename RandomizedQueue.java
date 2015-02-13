@@ -123,13 +123,11 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     s.enqueue("b");
     s.enqueue("c");
     s.enqueue("d");
-    
-    //StdOut.println(s.sample());
-    
+  
     s.dequeue();
     
     Iterator itr = s.iterator();
-    while(itr.hasNext()) {
+    while (itr.hasNext()) {
       Object element = itr.next();
       System.out.print(element + " ");
     }
